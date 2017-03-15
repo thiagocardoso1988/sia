@@ -12,6 +12,9 @@ use App\Models\Placa;
 
 class PlacaController extends Controller {
 
+    /**
+     * Construtor da classe
+     */
     public function __construct(){
     }
 
@@ -27,7 +30,7 @@ class PlacaController extends Controller {
             'part_number' => 'required|unique:placas',
             'alias'       => 'required|min:10|max:255',
         );
-        // mensagens
+        // define as mensagens retornadas em caso de erro na validação -------
         $messages = array(
             'part_number.required' => 'O número de série é obrigatório.',
             'part_number.unique'   => 'O número de série deve ser único. O informado ja foi utilizado.',
