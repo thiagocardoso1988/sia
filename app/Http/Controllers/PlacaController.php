@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Redirect;
 use Validator;
 
 use Sentinel;
+use App\Models\User;
 use App\Models\Placa;
+use App\Models\Leitura;
 
 class PlacaController extends Controller {
 
@@ -49,5 +51,34 @@ class PlacaController extends Controller {
         $placa->fill($request->all());
         $placa->save();
         return redirect()->route('appdevices.show');
+    }
+
+    public function getHistory($placa=null){
+        // obtém a placa de acordo com o usuário logado, e retorna os dados da
+        // primeira placa encontrada
+        foreach($this->getPlacas($placa) as $p){
+            $data[] = $p->id;
+        }
+        if (count($data)){
+            $leituras = Leitura::whereIn('placa_id', $data);
+            // devolve o melhor tipo de paginação com base no dispositivo
+            if (stripos($_SERVER['HTTP_USER_AGENT'], "mobile") !== false){
+                $leituras = $leituras->simplePaginate();
+            } else {    
+                $leituras = $leituras->paginate();
+            }
+        }
+        return view('app.history')->withPlacas($this->getPlacas())
+                                  ->withActiveDevice($placa)
+                                  ->withDados($leituras);
+    }
+
+    public function getPlacas($pn=null){
+        $user = Sentinel::getUser();
+        $placas = Placa::where('user_id', '=', $user->id);
+        if($pn){
+            $placas = $placas->where('part_number', '=', $pn);
+        }
+        return $placas->get();
     }
 }

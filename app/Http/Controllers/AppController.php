@@ -9,28 +9,48 @@ use App\Models\Placa;
 
 class AppController extends Controller {
 
-	public function __construct(){
-		if(!Sentinel::check())
-			return redirect('login')->with('error', 'É necessário estar logado para acessar a página.');
-	}
+    public function __construct(){
+        if(!Sentinel::check())
+            return redirect('login')->with('error', 'É necessário estar logado para acessar a página.');
+    }
 
-	public function index(){
-		// obtém as placas do usuário
-		$placas = Placa::where('user_id', '=', Sentinel::getUser()->id)->get();
-		// caso não tenha nenhuma placa, direciona para a view de dispositivos
-		if ($placas->count()){
-			return view('app.index')->withPlacas($placas);
-		}
-		$this->getDevices();
-	}
+    public function index(Request $request){
+        $device = $request->device;
+        return $this->showIndex($device);        
+    }
 
-	public function getDevices(){
-		$placas = Placa::all();
-		return view('app.devices')->withPlacas($placas);
-	}
+    private function showIndex($device){
+        // obtém as placas do usuário
+        $placas = Placa::where('user_id', '=', Sentinel::getUser()->id)->get();
+        $placa = $placas->first()->part_number;
+        if ($device == null) {
+            $device = $placa;
+        }
+        // obtém os dados de leitura da placa em questão
+        $data = $this->getData($device)->take(10);
+        //return [$device, $data];
+        // caso não tenha nenhuma placa, direciona para a view de dispositivos
+        if ($placas->count()){
+            return view('app.index')->withPlacas($placas)
+                                    ->withActiveDevice($device)
+                                    ->withDados($data);
+        }
+        $this->getDevices();
+    }
 
-	public function getHistory() {
-		$placas = Placa::all();
-		return view('app.history')->withPlacas($placas);
-	}
+    public function getDevices(){
+        $placas = Placa::all();
+        return view('app.devices')->withPlacas($placas)
+                                  ->withActiveDevice($placas->first()->part_number)
+                                  ->withDados(null);
+    }
+
+    public function getHistory(Request $request) {
+        $device = $request->device;
+        return app('App\Http\Controllers\PlacaController')->getHistory($device);
+    }
+
+    private function getData($device){
+        return app('App\Http\Controllers\LeituraController')->getData($device);
+    }
 }

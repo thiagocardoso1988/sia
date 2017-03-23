@@ -13,4 +13,8 @@ class Placa extends Model
 		return $this->belongsTo('App\Models\User');
 	}
 
+	public function dados() {
+		return $this->hasMany('App\Models\Leitura');
+	}
+
 }

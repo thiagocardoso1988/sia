@@ -16,8 +16,8 @@ class CreateLeiturasTable extends Migration
         Schema::create('leituras', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTimeTz('horario_leitura');
-            $table->float('valor_temperatura', 2, 2);
-            $table->float('valor_umidade', 2, 2);
+            $table->text('valor_temperatura');
+            $table->text('valor_umidade');
             $table->integer('placa_id')->unsigned();
             $table->timestamps();
 
