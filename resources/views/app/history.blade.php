@@ -5,7 +5,7 @@
   @include('app.layout.partials._deviceselector')
   <h1>Histórico</h1>
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Dispositivos cadastrados</h3>
