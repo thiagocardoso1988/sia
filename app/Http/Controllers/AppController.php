@@ -22,26 +22,28 @@ class AppController extends Controller {
     private function showIndex($device){
         // obtém as placas do usuário
         $placas = Placa::where('user_id', '=', Sentinel::getUser()->id)->get();
-        $placa = $placas->first()->part_number;
-        if ($device == null) {
-            $device = $placa;
-        }
-        // obtém os dados de leitura da placa em questão
-        $data = $this->getData($device)->take(10);
-        //return [$device, $data];
-        // caso não tenha nenhuma placa, direciona para a view de dispositivos
         if ($placas->count()){
-            return view('app.index')->withPlacas($placas)
-                                    ->withActiveDevice($device)
-                                    ->withDados($data);
+            $placa = $placas->first()->part_number;
+            if ($device == null) {
+                $device = $placa;
+            }
+            // obtém os dados de leitura da placa em questão
+            $data = $this->getData($device)->take(10);
+            // caso não tenha nenhuma placa, direciona para a view de dispositivos
+            if ($placas->count()){
+                return view('app.index')->withPlacas($placas)
+                                        ->withActiveDevice($device)
+                                        ->withDados($data);
+            }
         }
-        $this->getDevices();
+        return $this->getDevices();
     }
 
     public function getDevices(){
         $placas = Placa::all();
+        $placa = ($placas->count()) ? $placas->first()->part_number : null;
         return view('app.devices')->withPlacas($placas)
-                                  ->withActiveDevice($placas->first()->part_number)
+                                  ->withActiveDevice($placa)
                                   ->withDados(null);
     }
 

@@ -1,3 +1,5 @@
+{{--dd(get_defined_vars()['__data'])--}}
+
 @extends('app.layout.main')
 
 

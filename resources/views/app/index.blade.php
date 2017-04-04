@@ -1,10 +1,10 @@
+{{--dd(get_defined_vars()['__data'])--}}
 <?php
 
   $last = $dados[0];
 
 ?>
 
-{{--dd(get_defined_vars()['__data'])--}}
 @extends('app.layout.main')
 
 
