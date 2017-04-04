@@ -42,6 +42,7 @@ class AppController extends Controller {
     public function getDevices(){
         $placas = Placa::all();
         $placa = ($placas->count()) ? $placas->first()->part_number : null;
+        //return view('app.devices')->withPlacas($placas)
         return view('app.devices')->withPlacas($placas)
                                   ->withActiveDevice($placa)
                                   ->withDados(null);

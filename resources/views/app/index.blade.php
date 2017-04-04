@@ -1,7 +1,7 @@
 {{--dd(get_defined_vars()['__data'])--}}
 <?php
 
-  $last = $dados[0];
+  $last = ($dados->count()) ? $dados[0] : null ;
 
 ?>
 
@@ -12,7 +12,7 @@
   @include('app.layout.partials._deviceselector')
   <!-- data display -->
   <div class="content">
-    @if($placas->count())
+    @if($placas->count() && $dados->count())
       <h1>Última Leitura</h1>
         <p class="text-muted"><strong>Horário:</strong> {{ \Carbon\Carbon::parse($last->horario_leitura)->format('d/m/Y H:i') }}</p>
   
