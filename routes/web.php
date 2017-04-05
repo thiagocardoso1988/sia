@@ -34,3 +34,7 @@ Route::group(['prefix' => 'app'], function(){
 
 Route::get('/testdata', 'TestDataController@index');
 Route::post('/testdata', 'TestDataController@process');
+
+Route::get('/test', function(){
+	return view('test');
+});

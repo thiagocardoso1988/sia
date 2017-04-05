@@ -28,7 +28,7 @@ class AppController extends Controller {
                 $device = $placa;
             }
             // obtém os dados de leitura da placa em questão
-            $data = $this->getData($device)->take(10);
+            $data = $this->getData($device)->take(10)->reverse();
             // caso não tenha nenhuma placa, direciona para a view de dispositivos
             if ($placas->count()){
                 return view('app.index')->withPlacas($placas)

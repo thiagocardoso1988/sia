@@ -87,31 +87,6 @@
     return i.umidade;
   });
 
-/*
-  function createData(a, columns){
-    var data = [];
-    $.each(a, function(k, v){
-      var d = [];
-      $.each(columns, function(k, v){
-        d.push(a[v]);
-      });
-      console.log(k, d);
-    });
-    return data;
-  }
-*/  
-  /*var data = [];
-  $.each(rawdata, function(k, v){
-    var d = [];
-    d.push(new Date(v['horario_leitura']));
-    d.push(parseFloat(v['valor_temperatura']));
-    d.push(parseFloat(v['valor_umidade']));
-    data.push(d);  
-  });*/
-  //console.log(rawdata);
-  //console.log(createData(rawdata, ['horario_leitura', 'valor_temperatura']));
-
-
   $(document).ready(function() {
 
     var options = {
@@ -128,9 +103,8 @@
         series: [{}, {}]
     };
 
-    console.log($.map(t, function(i){ return [i.horario, i.umidade]; }));
-
-
+    options.series[0].name = 'Temperatura';
+    options.series[1].name = 'Umidade';
     options.series[0].data = $.map(t, function(i){ return [i.temperatura]; });
     options.series[1].data = $.map(t, function(i){ return [i.umidade]; });
     console.log(options);
