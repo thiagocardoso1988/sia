@@ -71,7 +71,7 @@
 @section('scripts')
 @parent
 
-<script src="/js/highcharts.js" type="text/javascript"></script>
+<script src="/public/js/highcharts.js" type="text/javascript"></script>
 <script type="text/javascript">
   var rawdata = {!! $dados !!};
   console.log(rawdata);  
