@@ -2,7 +2,7 @@
 
 
 @section('stylesheets')
-	<link rel="stylesheet" href="/css/app.css">
+	<link rel="stylesheet" href="/public/css/app.css">
 @endsection
 
 
@@ -12,5 +12,5 @@
 
 
 @section('scripts')
-	<script src="/js/app.js" type="text/javascript"></script>
+	<script src="/public/js/app.js" type="text/javascript"></script>
 @endsection
