@@ -23,10 +23,10 @@
     <title>Landing Page - Start Bootstrap Theme</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/public/css/site.css" rel="stylesheet">
+    <link href="/css/site.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/public/css/landing-page.css" rel="stylesheet">
+    <link href="/css/landing-page.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -234,6 +234,6 @@
         </div>
     </footer>
 
-    <script src="/public/js/site.js"></script>
+    <script src="/js/site.js"></script>
 
 </body></html>
