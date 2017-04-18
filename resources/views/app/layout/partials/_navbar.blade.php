@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img src="{{ URL::to('/') }}/images/logos/logo_sia.png" class="logo-top-menu">
+        <img src="/images/logos/logo_sia.png" class="logo-top-menu">
       </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
