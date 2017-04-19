@@ -12,6 +12,7 @@ class AppController extends Controller {
     public function __construct(){
         if(!Sentinel::check())
             return redirect('login')->with('error', 'É necessário estar logado para acessar a página.');
+        //$this->user = Sentinel::getuser();
     }
 
     public function index(Request $request){
@@ -40,7 +41,7 @@ class AppController extends Controller {
     }
 
     public function getDevices(){
-        $placas = Placa::all();
+        $placas = Placa::where('user_id', '=', Sentinel::getuser()->id)->get();
         $placa = ($placas->count()) ? $placas->first()->part_number : null;
         //return view('app.devices')->withPlacas($placas)
         return view('app.devices')->withPlacas($placas)
